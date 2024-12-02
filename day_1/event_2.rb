@@ -1,16 +1,12 @@
 require_relative 'parse_input'
-require_relative 'input'
+require_relative 'input_data'
+
+def get_counts(list)
+  list.each_with_object({}) { |val, hash| hash[val] = hash.fetch(val, 0) + 1 }
+end
 
 def similarity_score(list1, list2)
-  counts = {}
-
-  list2.each do |val|
-    if counts[val]
-      counts[val] += 1
-    else
-      counts[val] = 1
-    end
-  end
+  counts = get_counts(list2)
 
   score = 0
   list1.each do |val|
@@ -22,5 +18,5 @@ def similarity_score(list1, list2)
   score
 end
 
-list1, list2 = parse_input($input)
+list1, list2 = parse_input(InputData::SAMPLE_DATA)
 p similarity_score(list1, list2)
