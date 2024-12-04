@@ -1,7 +1,7 @@
 require_relative 'parse_input'
 require 'yaml'
 
-sample_data = YAML.load_file('input_data.yml')['sample_data']
+sample_data = YAML.load_file('data.yml')['sample_data']
 
 def total_distance(list1, list2)
   list = []
