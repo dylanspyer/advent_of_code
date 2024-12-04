@@ -128,9 +128,9 @@ def left_right_down_diag_xmas?(grid, row, col)
   match_pointer = 0
   4.times do |i|
     r = row + i
-    c = col - i
+    c = col + i
 
-    break unless r < grid.length && c >= 0
+    break unless r < grid.length && c < grid[r].length
 
     if grid[r][c] == match[match_pointer]
       match_pointer += 1
@@ -169,9 +169,9 @@ def right_left_down_diag_xmas?(grid, row, col)
   match_pointer = 0
   4.times do |i|
     r = row + i
-    c = col + i
+    c = col - i
 
-    break unless r < grid.length && c < grid[r].length
+    break unless r < grid.length && c >= 0
 
     if grid[r][c] == match[match_pointer]
       match_pointer += 1
@@ -186,7 +186,6 @@ end
 
 def part1(data)
   grid = parse_input(data)
-  match = 'XMAS'
   matched = 0
 
   grid.each_with_index do |string, row_idx|
