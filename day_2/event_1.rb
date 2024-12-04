@@ -1,8 +1,8 @@
 require_relative 'parse_input'
 require 'yaml'
 
-sample_data1 = parse_input(YAML.load_file('input_data.yml')['sample_data1'])
-sample_data2 = parse_input(YAML.load_file('input_data.yml')['sample_data2'])
+sample_data1 = parse_input(YAML.load_file('data.yml')['sample_data1'])
+sample_data2 = parse_input(YAML.load_file('data.yml')['sample_data2'])
 
 def get_direction(num1, num2)
   num2 - num1 >= 0 ? 'increasing' : 'decreasing'
