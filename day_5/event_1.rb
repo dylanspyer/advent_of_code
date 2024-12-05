@@ -97,5 +97,5 @@ def part1(updates_string, rules_string)
   end
 end
 
-p part1(updates1, rules1)
-p part1(updates2, rules2)
+# p part1(updates1, rules1)
+# p part1(updates2, rules2)
