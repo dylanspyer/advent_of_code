@@ -1,4 +1,4 @@
-# advent_of_code_2024
+# advent_of_code
 
 A series of code challenges.
 
