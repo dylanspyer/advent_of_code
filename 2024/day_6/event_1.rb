@@ -25,30 +25,28 @@ def part1(data)
 
   row, col = find_start(grid)
   curr_dir_idx = 0
-  curr_dir = directions[curr_dir_idx]
   moves = 0
 
   while row_valid?(row, grid) && col_valid?(row, col, grid)
-    if grid[row + curr_dir[0]] && grid[row + curr_dir[0]][col + curr_dir[1]] == '#'
-      curr_dir_idx = curr_dir_idx + 1 < directions.length ? curr_dir_idx + 1 : 0
-      curr_dir = directions[curr_dir_idx]
-    end
+    next_row = row + directions[curr_dir_idx][0]
+    next_col = col + directions[curr_dir_idx][1]
+
+    curr_dir_idx = (curr_dir_idx + 1) % directions.length if grid[next_row] && grid[next_row][next_col] == '#'
 
     if row_valid?(row, grid) && col_valid?(row, col, grid) && grid[row][col] != 'X'
       moves += 1
       grid[row][col] = 'X'
     end
 
-    row += curr_dir[0]
-    col += curr_dir[1]
-
+    row += directions[curr_dir_idx][0]
+    col += directions[curr_dir_idx][1]
   end
 
   moves
 end
 
-# p part1(sample_data1)
-p part1(sample_data2)
+p part1(sample_data1)
+# p part1(sample_data2)
 
 # Given a grid with a guard `^`, spaces avaiable to move to `.`, and blockaids `#`
 # Progress the guard through the grid
