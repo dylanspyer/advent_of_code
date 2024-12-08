@@ -37,10 +37,6 @@ def part1(data)
   end
 end
 
-def part2(data)
-  equations = build_equations_hash(data)
-end
-
 p part1(sample_data1)
 p part1(sample_data2)
 
@@ -72,3 +68,4 @@ p part1(sample_data2)
 # 121 [27]
 
 # [148, 3267, 3267, 87480]
+# 92_612_386_119_138
