@@ -22,21 +22,23 @@ def includes_test_val?(nums, test_val)
   end
 
   rest = nums[2..] || []
-  true if includes_test_val?([nums[0] + nums[1]] + rest,
-                             test_val) || includes_test_val?([nums[0] * nums[1]] + rest, test_val)
+  true if includes_test_val?([nums[0] + nums[1]] + rest, test_val) ||
+          includes_test_val?([nums[0] * nums[1]] + rest, test_val) ||
+          includes_test_val?([(nums[0].to_s + nums[1].to_s).to_i] + rest, test_val)
 end
 
 def part1(data)
   equations = build_equations_hash(data)
-  result = 0
 
-  equations.each do |test_val, nums|
+  equations.reduce(0) do |memo, (test_val, nums)|
     test_val = test_val.to_i
 
-    result += test_val if includes_test_val?(nums, test_val)
+    includes_test_val?(nums, test_val) ? memo + test_val : memo
   end
+end
 
-  result
+def part2(data)
+  equations = build_equations_hash(data)
 end
 
 p part1(sample_data1)
