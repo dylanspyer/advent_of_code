@@ -18,6 +18,9 @@ end
 def valid_position?(coordinate, grid)
   row, col = coordinate
 
+  p "row: #{row}"
+  p "col: #{col}"
+
   row >= 0 && col >= 0 && row < grid.length && col < grid[0].length
 end
 
@@ -32,11 +35,29 @@ def part1(data)
         next if p1 == p2
 
         delta = [p2[0] - p1[0], p2[1] - p1[1]]
-        an1 = [p1[0] - delta[0], p1[1] - delta[1]]
-        an2 = [p1[0] + delta[0] + delta[0], p1[1] + delta[1] + delta[1]]
+        row_delta, col_delta = delta
 
-        antinodes.add(an1) if valid_position?(an1, grid)
-        antinodes.add(an2) if valid_position?(an2, grid)
+        curr_row_delta = row_delta
+        curr_col_delta = col_delta
+        while valid_position?([p1[0] - curr_row_delta, p1[1] - curr_col_delta], grid)
+          an1 = [p1[0] - curr_row_delta, p1[1] - curr_col_delta]
+
+          antinodes.add(an1)
+
+          curr_row_delta += row_delta
+          curr_col_delta += col_delta
+        end
+
+        curr_row_delta = row_delta
+        curr_col_delta = col_delta
+        while valid_position?([p1[0] + curr_row_delta, p1[1] + curr_col_delta], grid)
+          an2 = [p1[0] + curr_row_delta, p1[1] + curr_col_delta]
+
+          antinodes.add(an2)
+
+          curr_row_delta += row_delta
+          curr_col_delta += col_delta
+        end
       end
     end
   end
@@ -47,34 +68,34 @@ end
 # p part1(sample_data1)
 p part1(sample_data2)
 
-# ...........#
-# ........0...
-# .....0......
-# ..#....0....
-# ....0.......
-# .#....A.....
-# ............
-# #...........
-# ........A...
-# .........A..
-# ............
-# ............
-#
-# ......#....#
-# ...#....0...
-# ....#0....#.
-# ..#....0....
+# ##....#....#
+# .#.#....0...
+# ..#.#0....#.
+# ..##...0....
 # ....0....#..
-# .#....A.....
-# ...#........
-# #......#....
-# ........A...
-# .........A..
-# ..........#.
-# ..........#.
+# .#...#A....#
+# ...#..#.....
+# #....#.#....
+# ..#.....A...
+# ....#....A..
+# .#........#.
+# ...#......##
+#
+# ##....#....#
+# .#.#....0...
+# ..M.#0....#.
+# ..#M...0....
+# ....#....#..
+# .#...##....#
+# ...#..#.....
+# #....#.#....
+# ..#.....A...
+# ....#....A..
+# .#........#.
+# ...#......##
 
 # 0's:
-# [1, 8]
+# [1
 # [2, 5]
 # => [-1, 3]  (take the distance between the two points)
 # ==> [-2, 6] (double it)
