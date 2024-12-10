@@ -55,7 +55,7 @@ def remove_left_gaps(expanded_dm)
     r -= 1 while expanded_dm[r] == '.'
     l += 1 while expanded_dm[l] != '.'
 
-    expanded_dm[l], expanded_dm[r] = expanded_dm[r], expanded_dm[l]
+    expanded_dm[l], expanded_dm[r] = expanded_dm[r], expanded_dm[l] if l < r
   end
 
   expanded_dm
@@ -72,7 +72,7 @@ def part1(disk_map)
   calculate_checksum(formatted_dm)
 end
 
-p part1 sample_data1
+# p part1 sample_data1
 p part1 sample_data2
 
 # 0099811188827773336446555566..............
