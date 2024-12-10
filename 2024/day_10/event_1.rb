@@ -24,13 +24,11 @@ def dfs(row, col, grid, count, seen)
 
     next unless valid
 
-    dfs(row + pos[0], col + pos[1], grid, count, seen)
+    dfs(next_row, next_col, grid, count, seen)
   end
 end
 
-def part1(data)
-  grid = data.split
-  count = { count: 0 }
+def get_trailheads(grid)
   trailheads = []
 
   grid.each_with_index do |row, i|
@@ -39,14 +37,28 @@ def part1(data)
     end
   end
 
+  trailheads
+end
+
+def find_num_of_paths(trailheads, grid)
+  count = { count: 0 }
   trailheads.each do |trailhead|
     row, col = trailhead
     seen = {}
     dfs(row, col, grid, count, seen)
   end
+
   count
 end
 
+def part1(data)
+  grid = data.split
+  trailheads = get_trailheads(grid)
+  find_num_of_paths(trailheads, grid)
+end
+
+p part1(sample_data1)
+p part1(sample_data2)
 p part1(sample_data3)
 
 # "89010123"
