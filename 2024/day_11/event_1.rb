@@ -36,25 +36,10 @@ sample_data3 = YAML.load_file('data.yml')['sample_data3']
 # [2024, [20,24], 2024, 1, 18216, 18216, [202, 197]], then flatten the array
 # [2024, 20, 24, 2024, 1, 18216, 18216, 202, 197], then update the top of the range we are iterating over
 
-def flip
-  1
-end
-
-def mult(num)
-  num * 2024
-end
-
-def split(num)
-  s = num.to_s
-  m = s.length / 2
-
-  [s[0...m], s[m...s.length]].map(&:to_i)
-end
-
 def part1(data)
   stones = data.split.map(&:to_i)
-  length = stones.length
-  times = 75
+
+  times = 25
   memo = {}
   while times.positive?
     stones = stones.flat_map.with_index do |stone, i|
@@ -79,3 +64,9 @@ def part1(data)
 end
 
 p part1(sample_data3)
+
+# Problem
+# Logic works, but it's not efficient enough to finish
+# Potential Solution
+# - Instead of working through the whole list at once, work through one number recursively 75 times
+# - Memoize those results, so by the time you're on the next number, most of the work is done
